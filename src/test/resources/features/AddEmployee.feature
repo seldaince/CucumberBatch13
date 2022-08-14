@@ -25,5 +25,5 @@ Feature: Add Employee
 
     Examples:
       | FirstName | MiddleName | LastName | Expected        |
-      | yigit h    | han        | ergun    | yigit han ergun |
+      | yigit     | han        | ergun    | yigit han ergun |
       | homer     | j          | simpson  | homer j simpson |

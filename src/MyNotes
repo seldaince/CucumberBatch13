@@ -1,0 +1,17 @@
+Class 2 notes
+
+Login
+
+Constant class:
+
+this class has methods that are repeated so we just use it once.
+methods are all caps in this class
+
+Common Method class:
+
+--cross browser testing
+
+we use switch and get configReader.getpropertyvalue to access browser but to
+access the browsers we createconfigreader/configfilepath IS(SYSTEM.SETPROPERTY) .
+At the end of switch we have default trow new runtimeexcetption ("invalid browser name")
+
