@@ -11,7 +11,15 @@ Common Method class:
 
 --cross browser testing
 
-we use switch and get configReader.getpropertyvalue to access browser but to
+-we use switch and get configReader.getpropertyvalue to access browser but to
 access the browsers we createconfigreader/configfilepath IS(SYSTEM.SETPROPERTY) .
 At the end of switch we have default trow new runtimeexcetption ("invalid browser name")
 
+-element.clear() will automatucly clear the data in that and the element.sendKeys() for text
+
+-webdriver wait is 20 and value explicit_wait that is in constant
+
+-explicit wait realise on condition - we have to call webdriver method
+-implicit wait realise on time - is available in java
+
+-selectdropdown() has visibility, value , index
