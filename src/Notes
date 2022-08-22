@@ -1,11 +1,34 @@
 Class 1 - Cucumber
 
-Cucumber - it is a tool that supports BDD
+Cucumber - it is a tool that supports BDD (Behavior Driven Development)
+        - OBJECTS IN JAVA HAVE STATE AND BEHAVIOR - BEHAVIOR IS FUNCTIONS
+        - Cucumber uses Gherkin language which is plain/simple english text
+
+Benefits of cucumber:
+- produce cucumber reports of execution / detailed reports to clients
+- cucumber bdd is open/free source
+- we can write test scripts in multiple languages Java, Ruby, Python etc
+- it easily integrates with selenium and other web based testing tools
+        - selenium we use to automate only web sites
+- cucumber is the most widely used Bdd tools and easy to implement data driven testing
+        - data driven testing is used for one script to execute one million test
+
+Gherkin keywords:
+Feature - each Gherkin file begins with a feature on what we are going to test
+Background - is used to define steps which are common to all the test
+Scenario - each feature contains some number of test and each test is called scenario
 
 Given - pre condition
 When - to perform actions
 And - supporting tag
 Then - expected result/outcome
+
+Every single scenario is considered as one test case
+
+How to create a cucumber project:
+- file new project - make sure it is in maven if not select java and build as maven
+- groupid is the company name (org.syntax/org.google)
+- artifactid is the name of the project (cucumberbatch13/googledrive)
 
 
 US - 2345 - Search employee by id
@@ -19,27 +42,49 @@ When user enters id in the employee id field
 And user clicks on search button
 Then user is able to see the employee
 
--- Cucumbers encourages code reusability concept
+-Cucumbers encourages code reusability concept - we can use the stages above and change the next test stages
 
-main - the code we write to develop the application, we write under main
+How to add dependencies:
+- after properties tag add <dependencies> </dependencies> tag
+- between dependencies type <dependency> </dependency> we need to add different dependency for each project
+  such as the following from maven repository
+        -selenium-java
+        -cucumber-java
+        -cucumber-junit
+        -apache poi OOXML
+        -commons IO
+-after adding the dependencies click on load maven changes on the top left corner
 
+
+main folder (we delete because we don't write any code to develop the application
+        - the code we write to develop the application, we write under main
+
+two types of codes:
 develop the application
 to test the application
 
-test - the code we write to test the application, we write under test
+test folder(we use this one) - the code we write to test the application, we write under test
+
+Framework is organised structure of folders that tell you what to write where
+    -gives us reporting of how many test has passed/failed, how long it took and other details of test
+    -data driven testing is not possible in selenium so we need framework to test against multiple test of data
+    -standard scripting and team consistency to do the same structure
+    -code re-usability
 
 2 things we have in every project
 
 - coding - java
 - non - java  - properties file, excel etc.
 
-coding will be at one place
-non java will be at another place
+coding will be at one place (under java folder)
+non java will be at another place (under resources folder/how to create is file-new-directory)
 
 
--- to write gherkin scenarios, we use feature files
+-- to write gherkin scenarios, we use feature files under resources
+    -instead of packages we crate new directory features because it's non java
+    -then we create files under features which will have multiple scenarios
 
-Valid admin login
+Valid admin login (name of the test case/scenario)
 Given user is navigated to HRMS application
 When user enters admin username and password
 And clicks on login button
@@ -53,6 +98,7 @@ many time it is not compatible with browser
 
 we use webdrivermanager from now onwards
 
+
 Class 2 -
 
 --  Recap --
@@ -65,4 +111,106 @@ What is framework -
 
     Feature file - declare steps in it
 
+POM - page object model is a design pattern in which we create object repository
+
+Class 3 -
+
+-- recap --
+    -- architecture of framework --
+    -- utils - to keep all the utilities of our project such as constants, config reader
+                common methods etc to reuse them.
+
+
+    -- steps - all step definitions can be found under this package for the gherkin
+    steps we used in feature file
+    -- Pages -- POM -- to implement object repository and functions.
+
+    Runner class - we use this class to execute all of our test cases
+
+For pre condition and post condition in cucumber we have 2 annotations
+
+Hooks -
+@Before - this one we use for pre condition
+@After - this one we use for post condition
+
+
+-- hooks should always be mentioned under steps package
+
+
+Background vs hooks
+
+Hooks are applicable to all feature files
+Background is applicable to just one feature file\
+
+Hooks execute first then background executes then scenario executes and in the
+end hooks executes again as post condition
+
+class - 4
+
+    -- recap --
+        -- cucumber options in runner class -
+        dry run - to quickly get the step definitions
+
+    --whenever we write new scenario in feature file, we must set dryrun to true
+    for step definition and then put this definition under steps package, after
+    writing the code in it, again set dryrun to false and execute the script
+
+
+        monochrome - when we set it to true, it removes irrelevant information
+        or unreadable character from console while executing cucumber test cases.
+
+        Hooks -
+        pre condition @Before
+        post condition @After
+
+        we must keep hooks class under steps package
+
+        background - common steps in a feature file until flow is not broken
+
+       it is applicable only to a feature file, every file can have a different background
+
+       tags - to categorize our scenarios for execution
+
+       what is data driver testing
+        when we execute our script against multiple sets of data we call it data
+        driven testing
+
+Class 5 -
+    -- recap --
+        -- What is data driven testing?
+        --
+
+
+    Data table -
+
+    examples table - works for complete scenario
+    Data table - it works only for one step
+
+
+Class 6
+ --  recap --
+    Data table -
+    we use data table to achieve data driven testing
+
+    2 types of data table -
+    with headers - list of maps
+    without headers - list
+
+    excel file - spreadsheets
+
+Homework - modify the details of the employee after adding it in the HRMS
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+                //we use inlcludes tag to run our runner classes
+                //** means src folder/* means runner package and then file name
+                    <includes>
+                        <include>**/*RunnerClass.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
 
